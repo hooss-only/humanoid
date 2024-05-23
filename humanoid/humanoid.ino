@@ -3,24 +3,31 @@
 
 Servo eyesVerticalServo;
 Servo eyesHorizontalServo;
+Servo headSpinServo;
 int eyesVertical = 0;
-int eyesHorizontal = 135; // 90 ~ 180
+int eyesHorizontal = 130; // 90 ~ 180
 const int EYES_SENSITIVE = 10;
 
 const long EYES_VERTICAL_PIN = 4;
 const long EYES_HORIZONTAL_PIN = 5;
 const long RECV_PIN = 7;
+const long HEAD_SPIN_PIN = 8;
+
+const int EYES_HORIZONTAL_MINIMUM = 110;
+const int EYES_HORIZONTAL_MAXIMUM = 180;
 
 IRrecv irrecv(RECV_PIN);
 
 void setup() {
 	eyesVerticalServo.attach(EYES_VERTICAL_PIN);
 	eyesHorizontalServo.attach(EYES_HORIZONTAL_PIN);
+	headSpinServo.attach(HEAD_SPIN_PIN);
 	Serial.begin(9600);
 	IrReceiver.begin(RECV_PIN, ENABLE_LED_FEEDBACK);
 }
 
 bool eyesMode = false;
+int test = 0;
 void loop() {
 	RemoteControlHandler();
 }
@@ -51,10 +58,10 @@ void RemoteControlHandler() {
 				eyesVertical = 0;
 			}
 			
-			if (eyesHorizontal < 0) {
-				eyesHorizontal = 0;
-			} else (eyesHorizontal > 160) {
-				eyesHorizontal = 160;
+			if (eyesHorizontal < EYES_HORIZONTAL_MINIMUM) {
+				eyesHorizontal = EYES_HORIZONTAL_MINIMUM;
+			} else if (eyesHorizontal > EYES_HORIZONTAL_MAXIMUM) {
+				eyesHorizontal = EYES_HORIZONTAL_MAXIMUM;
 			}
 
 			Serial.println(eyesHorizontal);
