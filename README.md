@@ -17,7 +17,7 @@ Remote control reciver -> Digital 7<br>
 
 # How to make
 
-1. You have to print and assemble (add more)<br>
+1. You have to print and assemble of Inmoov models.<br>
 2. Arduino project folder is 'humanoid' folder inside of our project.<br>
 3. Connect pins according to the [#Pin Connection](#pin-connection)<br>
 4. Then, you have to upload the arduino project to your arduino with arduino ide(or cli).<br>
